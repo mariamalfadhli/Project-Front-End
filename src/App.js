@@ -1,23 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.css";
+import Home from "./components/Pages/Home";
+import Recipe from "./components/Pages/Recipe";
+import SignIn from "./components/Pages/SignIn";
+import SignUp from "./components/Pages/SignUp";
+import { Navigate, Route, Routes } from "react-router-dom";
+import { useEffect, useState } from "react";
+import UserContext from "./context/UserContext";
+import Navbar from "./components/Navbar";
 function App() {
+  const [user, setUser] = useState(false);
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setUser(true);
+    }
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <UserContext.Provider value={[user, setUser]}>
+        {user ? (
+          <>
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/recipe" element={<Recipe />} />
+              <Route path="/*" element={<Navigate to="/" />} />
+            </Routes>
+          </>
+        ) : (
+          <Routes>
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/*" element={<Navigate to="/signin" />} />
+          </Routes>
+        )}
+      </UserContext.Provider>
     </div>
   );
 }
