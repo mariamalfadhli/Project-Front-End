@@ -7,6 +7,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
 import UserContext from "./context/UserContext";
 import Navbar from "./components/Navbar";
+import Category from "./components/Pages/Category";
 function App() {
   const [user, setUser] = useState(false);
   useEffect(() => {
@@ -23,6 +24,7 @@ function App() {
             <Navbar />
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/category" element={<Category />} />
               <Route path="/recipe" element={<Recipe />} />
               <Route path="/*" element={<Navigate to="/" />} />
             </Routes>
