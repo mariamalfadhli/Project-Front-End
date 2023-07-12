@@ -15,6 +15,8 @@ const Recipe = () => {
     queryFn: getRecipe,
   });
 
+  console.log({ data });
+
   const recipeList = data?.map((recipe) => <RecipeCard recipe={recipe} />);
   const queryClient = useQueryClient();
   const [showModalR, setShowModalR] = useState(false);
@@ -23,7 +25,7 @@ const Recipe = () => {
   const handleRecipe = (e) => {
     setRecipeInfo({ ...recipeInfo, [e.target.name]: e.target.value });
   };
-
+  console.log(recipeInfo);
   const { mutate: createRecipeFun, error: errorCreate } = useMutation({
     mutationFn: () => createRecipe(recipeInfo),
     onSuccess: () => {
@@ -34,7 +36,7 @@ const Recipe = () => {
   });
 
   const handleCreateRecipe = () => {
-    createRecipeFun();
+    createRecipeFun(recipeInfo);
   };
 
   return (
@@ -62,10 +64,11 @@ const Recipe = () => {
       {/*recipe list */}
       {recipeList}
       <ModalRecipe
+        setRecipeInfo={setRecipeInfo}
         showModalR={showModalR}
         setShowModalR={setShowModalR}
-        handleCategory={handleRecipe}
-        handleCreateCategory={handleCreateRecipe}
+        handleRecipe={(e) => handleRecipe(e)}
+        handleCreateRecipe={handleCreateRecipe}
       />
     </div>
   );
