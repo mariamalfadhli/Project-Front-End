@@ -29,7 +29,7 @@ const Recipe = () => {
   const { mutate: createRecipeFun, error: errorCreate } = useMutation({
     mutationFn: () => createRecipe(recipeInfo),
     onSuccess: () => {
-      queryClient.invalidateQueries(["Recipe"]);
+      queryClient.invalidateQueries(["Recipes"]);
       navigate("/recipe");
       setShowModalR(false);
     },

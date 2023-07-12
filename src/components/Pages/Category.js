@@ -27,7 +27,7 @@ const Category = () => {
   const { mutate: createCategoryFun, error: errorCreate } = useMutation({
     mutationFn: () => createCategory(categoryInfo),
     onSuccess: () => {
-      queryClient.invalidateQueries(["Category"]);
+      queryClient.invalidateQueries(["Categories"]);
       navigate("/category");
       setShowModal(false);
     },
