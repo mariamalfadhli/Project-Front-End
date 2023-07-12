@@ -4,6 +4,7 @@ import { useState } from "react";
 import { signUp, storeToken } from "../../api/auth";
 import ErrorMsg from "../ErrorMsg";
 import UserContext from "../../context/UserContext";
+import { NavLink } from "react-router-dom";
 const SignUp = () => {
   const [userInfo, setUserInfo] = useState({});
   const [user, setUser] = useContext(UserContext);
@@ -55,7 +56,16 @@ const SignUp = () => {
         name="image"
       />
       <ErrorMsg error={error} />
-      <button onClick={handleSignUp}>SignUp</button>
+      <div>
+        <button className="text-blue-600" onClick={handleSignUp}>
+          SignUp
+        </button>
+      </div>
+      <div>
+        <NavLink to="/signin">
+          <button className="text-red-600">Have account?, Signin</button>
+        </NavLink>
+      </div>
     </div>
   );
 };

@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 import { signIn, storeToken } from "../../api/auth";
 import ErrorMsg from "../ErrorMsg";
 import UserContext from "../../context/UserContext";
+import { NavLink } from "react-router-dom";
 
 const SignIn = () => {
   const [userInfo, setUserInfo] = useState({});
@@ -40,7 +41,14 @@ const SignIn = () => {
         name="password"
       />
       <ErrorMsg error={error} />
-      <button onClick={handleSignIn}>SignIn</button>
+      <div>
+        <button onClick={handleSignIn}>SignIn</button>
+      </div>
+      <div>
+        <NavLink to="/signup">
+          <button className="text-red-600">Don't have account, Signup</button>
+        </NavLink>
+      </div>
     </div>
   );
 };
